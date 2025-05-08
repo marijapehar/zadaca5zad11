@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8">
+  <title>Obrada Temperature</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    .rezultat {
+      background-color: #f0f8ff;
+      border: 1px solid #ccc;
+      padding: 15px;
+      width: fit-content;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Rezultati obrade temperature</h1>
+  <div class="rezultat" id="output"></div>
+
+  <script>
+    const tempDay = ['2023-11-29', -1, 0, -0.5, 0.5, 0, 1.2, 1.8, 2, 3, 4, 6, 9, 12, 7, 6, 6, 8, 5, 4, 2, 3, 2, 1, 0];
+
+    function obradiTemperaturu(podaci) {
+      const datum = podaci[0];
+      const temperature = podaci.slice(1);
+
+      const minTemp = Math.min(...temperature);
+      const maxTemp = Math.max(...temperature);
+      const prosjek = temperature.reduce((sum, temp) => sum + temp, 0) / temperature.length;
+
+      // Ispis u konzolu
+      console.log("Datum:", datum);
+      console.log("Najmanja temperatura:", minTemp.toFixed(1), "°C");
+      console.log("Najveća temperatura:", maxTemp.toFixed(1), "°C");
+      console.log("Prosječna temperatura:", prosjek.toFixed(1), "°C");
+
+      // Ispis na stranici
+      const output = document.getElementById("output");
+      output.innerHTML = `
+        <p><strong>Datum:</strong> ${datum}</p>
+        <p><strong>Najmanja temperatura:</strong> ${minTemp.toFixed(1)} °C</p>
+        <p><strong>Najveća temperatura:</strong> ${maxTemp.toFixed(1)} °C</p>
+        <p><strong>Prosječna temperatura:</strong> ${prosjek.toFixed(1)} °C</p>
+      `;
+    }
+
+    obradiTemperaturu(tempDay);
+  </script>
+</body>
+</html>
